@@ -7,4 +7,13 @@ django-admin startproject <project name>
 cd <project name>
 django-admin startapp <app name>
 
+#runserver
+python manage.py runserver
+
 #create py file in <app name>
+
+
+#views.py
+def index(response):
+    return HttpResponse("working........")
+
