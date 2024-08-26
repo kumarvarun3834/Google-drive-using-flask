@@ -8,6 +8,6 @@ from . import views
 # this urlpatterns name is also fixed
 urlpatterns=[
     path("",views.index,name="index"),
-    path("start/",views.start,name="start")
+    path("start/",views.start,name="start") ,  #name can be anything
     # path("start/",views.index,name="index")
 ]
