@@ -1,0 +1,10 @@
+pip install django
+
+#start project
+django-admin startproject <project name>
+
+#start app
+cd <project name>
+django-admin startapp <app name>
+
+#create py file in <app name>
