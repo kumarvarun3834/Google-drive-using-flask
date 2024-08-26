@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # here all the application to be configured should be given at end
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "practice.apps.PracticeConfig", #<appname>.apps.<appname>Config
+                                                      # ^ here app name must be capital
 ]
 
 MIDDLEWARE = [
