@@ -5,12 +5,12 @@
 {% block content %}
     <img class="bg" src="{{ url_for('static', filename='img/img.png') }}" alt="Background Image">
     <div class="file-container">
-        {% for semester in semesters %}
+        {% for folder in folders %}
         <div class="folder-item">
-            <a href="{{ url_for('subject', semester=semester[1:]) }}">
+            <a href="{{ url_for('folders', folder=folder[1:]) }}">
                 <img src="{{ url_for('static', filename='img/folder (2).png') }}" class="folder" alt="Folder">
             </a>
-            <a href="{{ url_for('subject', semester=semester[1:]) }}" class="folder-label">{{ semester[1:] }}</a>
+            <a href="{{ url_for('subject', folder=folder[1:]) }}" class="folder-label">{{ folder[1:] }}</a>
         </div>
         {% endfor %}
     </div>
