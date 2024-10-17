@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image</title>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kite+One&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        img.bg {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        img.w {
+            position: absolute;
+            transform: scale(1);
+            top: 100px;
+            right: 0;
+            width: 50vw;
+            height: 75vh;
+        }
+
+        img.l {
+            position: absolute;
+            transform: rotate(115deg);
+            margin-right: 20px;
+            left: -1%;
+            top: -20%;
+            width: 385.07px;
+            height: 540px;
+        }
+
+        h1 {
+            position: relative;
+            text-align: center;
+            font-family: 'Londrina Sketch', cursive;
+            font-size: 125px;
+        }
+
+        h2.main {
+            position: relative;
+            text-align: left;
+            margin-left: 45px;
+            margin-top: 150px;
+            margin-bottom: 20px;
+            font-family: 'Londrina Solid', cursive;
+            font-size: 60px;
+        }
+
+        h2.content {
+            position: relative;
+            text-align: left;
+            margin-left: 45px;
+            margin-top: 5px;
+            font-family: 'londrina sketch', cursive, 'Arial', sans-serif;
+            font-size: 35px;
+            font-weight: 900;
+        }
+
+        button {
+            position: relative;
+            background-color: transparent;
+            font-family: 'kite one', cursive;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 25px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 40px;
+            border-width: 3.4px;
+            border-color: black;
+            border-style: solid;
+            margin-left: 120px;
+            margin-top: 25px;
+        }
+
+        button:hover {
+            color: white;
+            background-color: black;
+            transition: 0.5s ease;
+        }
+
+        /* Media query for phones (hides the woman image on smaller screens) */
+        @media (max-width: 768px) {
+            img.w {
+                display: none;
+            }
+
+            h1 {
+                font-size: 60px;
+            }
+
+            h2.main {
+                font-size: 40px;
+                margin-left: 20px;
+            }
+
+            h2.content {
+                font-size: 25px;
+                margin-left: 20px;
+            }
+
+            button {
+                font-size: 20px;
+                margin-left: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img class="bg" src="{{ url_for('static', filename='img/image1.png') }}" alt="img">
+    <img class="w" src="{{ url_for('static', filename='img/woman.png') }}" alt="woman">
+    <img class="l" src="{{ url_for('static', filename='img/leaf.png') }}" alt="leaf">
+
+    <h1>StudyVault.</h1>
+    <h2 class="main">From Chaos to clarity,<br>
+        Say Goodbye to Resource Hassles.
+    </h2>
+    <h2 class="content">Your Campus Resource Hub for<br>
+        Effortless Access and Management.
+    </h2>
+
+    <a href="{{ url_for('semester') }}"><button>Get Started</button></a>
+
+</body>
+</html>

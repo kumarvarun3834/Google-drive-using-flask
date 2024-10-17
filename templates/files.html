@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block header_title %}Files for {{ resource }}{% endblock %}
+
+{% block content %}
+    <img class="bg" src="{{ url_for('static', filename='img/img.png') }}" alt="Background Image">
+    <div class="file-container">
+        {% for file in files %}
+        <div class="folder-item">
+            <a href="{{ url_for('files', semester=semester, subject=subject, year=year, resource=resource, file=file[0]) }}">
+                <img src="{{ url_for('static', filename='img/folder (2).png') }}" class="folder" alt="Folder">
+            </a>
+            <a href="{{ url_for('files', semester=semester, subject=subject, year=year, resource=resource, file=file[0]) }}" class="folder-label">{{ file[1] }}</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

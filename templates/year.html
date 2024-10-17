@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block header_title %}Choose Year{% endblock %}
+
+{% block content %}
+    <img class="bg" src="{{ url_for('static', filename='img/img.png') }}" alt="Background Image">
+    <div class="file-container">
+        {% for year in years %}
+        <div class="folder-item">
+            <a href="{{ url_for('resource', semester=semester, subject=subject, year=year[1:]) }}">
+                <img src="{{ url_for('static', filename='img/folder (2).png') }}" class="folder" alt="Folder">
+            </a>
+            <a href="{{ url_for('resource', semester=semester, subject=subject, year=year[1:]) }}" class="folder-label">{{ year[1:] }}</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
