@@ -50,9 +50,11 @@ def show_directory(subpath=''):
     files = files_data.get(current_path, [])
 
     # Escape folder names for security in rendering
-    folder_names = [escape(folder['last_name']) for folder in subfolders]
+    # folder_names = [escape(folder['last_name']) for folder in subfolders]
+    # Generate breadcrumb
+    breadcrumb = current_path.strip('/').split('/')
     
-    return render_template('directory.html', folders=folder_names, files=files, folder_path=current_path)
+    return render_template('directory.html', folders=[folder['last_name'] for folder in subfolders], files=files, folder_path=current_path, breadcrumb=breadcrumb)
 
 # Run the application
 if __name__ == '__main__':

@@ -1,27 +1,34 @@
 {% extends "base.html" %}
 
-{% block title %}Directory - {{ folder_path }}{% endblock %}
+{% block title %}Directory: {{ folder_path }}{% endblock %}
 
 {% block content %}
-    <!-- Background image -->
-    <img class="bg" src="{{ url_for('static', filename='img/img.png') }}" alt="Background Image">
+<img class="bg" src="{{ url_for('static', filename='img/img.png') }}" alt="Background Image">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="{{ url_for('show_directory', subpath='') }}">Home</a>
+            {% for part in breadcrumb %}
+                <span> &gt; </span>
+                <a href="{{ url_for('show_directory', subpath='/'.join(breadcrumb[:breadcrumb.index(part)+1])) }}">{{ part }}</a>
+            {% endfor %}
+        </div>
 
-<div class="container">
-    
-    <h1>Current Directory: {{ folder_path }}</h1>
+        <h2>Folders</h2>
+        <ul>
+            {% for folder in folders %}
+            <li>
+                <a href="{{ url_for('show_directory', subpath=folder_path ~ '/' ~ folder) }}">{{ folder }}</a>
+            </li>
+            {% endfor %}
+        </ul>
 
-    <h2>Folders</h2>
-    <ul>
-        {% for folder in folders %}
-        <li><a href="{{ url_for('show_directory', subpath=folder) }}">{{ folder }}</a></li>
-        {% endfor %}
-    </ul>
-
-    <h2>Files</h2>
-    <ul>
-        {% for file in files %}
-        <li><a href="{{ url_for('static', filename=folder_path ~ '/' ~ file) }}" download>{{ file }}</a></li>
-        {% endfor %}
-    </ul>
-</div>
+        <h2>Files</h2>
+        <ul>
+            {% for file in files %}
+            <li>
+                <a href="{{ url_for('static', filename=folder_path ~ '/' ~ file) }}" download>{{ file }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
