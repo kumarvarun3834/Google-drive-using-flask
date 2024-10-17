@@ -9,19 +9,22 @@
             <a href="{{ url_for('show_directory', subpath='') }}">Home</a>
             {% for part in breadcrumb %}
                 <span> &gt; </span>
-                <a href="{{ url_for('show_directory', subpath='/'.join(breadcrumb[:breadcrumb.index(part)+1])) }}">{{ part }}</a>
+                <a href="{{ url_for('show_directory', subpath='/'.join(breadcrumb[:loop.index])) }}">{{ part }}</a>
             {% endfor %}
         </div>
 
         <h2>Folders</h2>
-        <ul>
+        <div class="file-container">
             {% for folder in folders %}
-            <li>
-                <a href="{{ url_for('show_directory', subpath=folder_path ~ '/' ~ folder) }}">{{ folder }}</a>
-            </li>
+            <div class="folder-item">
+                <a href="{{ url_for('show_directory', subpath=folder_path ~ '/' ~ folder) }}">
+                    <img src="{{ url_for('static', filename='img/folder (2).png') }}" class="folder" alt="Folder">
+                </a>
+                <a href="{{ url_for('show_directory', subpath=folder_path ~ '/' ~ folder) }}" class="folder-label">{{ folder }}</a>
+            </div>
             {% endfor %}
-        </ul>
-
+        </div>
+        
         <h2>Files</h2>
         <ul>
             {% for file in files %}
