@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from markupsafe import escape  # Import escape for sanitization
 import os
 import csv
 
@@ -33,18 +34,25 @@ def read_files_data(csv_filename):
             files_data[folder_path].append(file_name)
     return files_data
 
-# Load the folder and file data at startup
-folder_data = read_menu_data('menu_data.txt')
-files_data = read_files_data('files_data.csv')
+
 
 @app.route('/')
+def index():
+    return render_template('index.html')
+    
 @app.route('/<path:subpath>')
 def show_directory(subpath=''):
-    current_path = '/' + subpath if subpath else '/'  # Default to root directory
+    # Load the folder and file data at startup
+    folder_data = read_menu_data('menu_data.txt')
+    files_data = read_files_data('files_data.csv')
+    current_path = '/' + escape(subpath) if subpath else '/'  # Escape subpath for security
     subfolders = [folder for folder in folder_data if folder['parent_path'] == current_path]
     files = files_data.get(current_path, [])
+
+    # Escape folder names for security in rendering
+    folder_names = [escape(folder['last_name']) for folder in subfolders]
     
-    return render_template('directory.html', folders=[folder['last_name'] for folder in subfolders], files=files, folder_path=current_path)
+    return render_template('directory.html', folders=folder_names, files=files, folder_path=current_path)
 
 # Run the application
 if __name__ == '__main__':

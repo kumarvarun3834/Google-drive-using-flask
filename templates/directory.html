@@ -1,28 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}Folder View{% endblock %}
+{% block title %}Directory - {{ folder_path }}{% endblock %}
 
 {% block content %}
-<div class="container">
-    <!-- Display Folders and Files -->
-    <div class="file-container">
-        <h2>Folders</h2>
-        <ul>
-            {% for folder in folders %}
-            <li>
-                <a href="{{ url_for('show_directory', subpath=folder_path ~ '/' ~ folder) }}">{{ folder }}</a>
-            </li>
-            {% endfor %}
-        </ul>
+    <!-- Background image -->
+    <img class="bg" src="{{ url_for('static', filename='img/img.png') }}" alt="Background Image">
 
-        <h2>Files</h2>
-        <ul>
-            {% for file in files %}
-            <li>
-                <a href="{{ url_for('static', filename=folder_path[1:] ~ '/' ~ file) }}" download>{{ file }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+<div class="container">
+    
+    <h1>Current Directory: {{ folder_path }}</h1>
+
+    <h2>Folders</h2>
+    <ul>
+        {% for folder in folders %}
+        <li><a href="{{ url_for('show_directory', subpath=folder) }}">{{ folder }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Files</h2>
+    <ul>
+        {% for file in files %}
+        <li><a href="{{ url_for('static', filename=folder_path ~ '/' ~ file) }}" download>{{ file }}</a></li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}

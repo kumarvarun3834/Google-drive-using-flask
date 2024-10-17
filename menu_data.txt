@@ -1,3 +1,13 @@
-/home/f1
-/home/f2
-/home/f3
+/home/Courses
+/home/Courses/Computer Science
+/home/Courses/Computer Science/Assignments
+/home/Courses/Computer Science/Projects
+/home/Courses/Mathematics
+/home/Courses/Mathematics/Homework
+/home/Resources
+/home/Resources/Study Materials
+/home/Resources/References
+/home/Resources/Notes
+/home/Projects
+/home/Projects/Group Work
+/home/Projects/Personal Projects
