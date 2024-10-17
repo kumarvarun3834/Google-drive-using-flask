@@ -155,6 +155,25 @@
             position: relative;
             z-index: 1;
         }
+
+        .file-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-list ul li {
+            margin: 10px 0;
+        }
+
+        .file-list ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .file-list ul li a:hover {
+            text-decoration: underline;
+        }
     </style>
 
     {% block styles %}{% endblock %}
@@ -171,7 +190,30 @@
         </nav>
     </header>
 
-    {% block content %}{% endblock %}
+    {% block content %}
+    <div class="container">
+        <!-- Display Folders and Files -->
+        <div class="file-container">
+            <h2>Folders</h2>
+            <ul>
+                {% for folder in folders %}
+                <li>
+                    <a href="{{ url_for('show_directory', folder_path=folder_path ~ '/' ~ folder) }}">{{ folder }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <h2>Files</h2>
+            <ul>
+                {% for file in files %}
+                <li>
+                    <a href="{{ url_for('static', filename=folder_path ~ '/' ~ file) }}" download>{{ file }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endblock %}
     
 </body>
 </html>

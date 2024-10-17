@@ -1,0 +1,6 @@
+[
+    {'full_path': '/home', 'last_name': 'home', 'hierarchy': ['home']},
+    {'full_path': '/home/f2', 'last_name': 'f2', 'hierarchy': ['home', 'f2']},
+    {'full_path': '/home/f3', 'last_name': 'f3', 'hierarchy': ['home', 'f3']},
+    {'full_path': '/home/f1/f2', 'last_name': 'f2', 'hierarchy': ['home', 'f1', 'f2']}
+]

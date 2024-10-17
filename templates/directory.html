@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Folder View{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Display Folders and Files -->
+    <div class="file-container">
+        <h2>Folders</h2>
+        <ul>
+            {% for folder in folders %}
+            <li>
+                <a href="{{ url_for('show_directory', subpath=folder_path ~ '/' ~ folder) }}">{{ folder }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Files</h2>
+        <ul>
+            {% for file in files %}
+            <li>
+                <a href="{{ url_for('static', filename=folder_path[1:] ~ '/' ~ file) }}" download>{{ file }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+/home/f1
+/home/f2
+/home/f3
