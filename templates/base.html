@@ -15,7 +15,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Londrina Sketch', cursive;
+            font-family: 'Garamond', cursive;
         }
 
         /* Header styles */
@@ -31,7 +31,7 @@
         }
 
         .header .title {
-            font-family: 'Londrina Sketch', cursive;
+            font-family: 'Londrina Solid', cursive;
             font-size: 2.5em;
             color: black;
             text-align: center;
@@ -67,12 +67,13 @@
         }
 
         .file-container {
-            margin-top: 0px;
+            /* this hadles the files placements */
+            margin-top: 25px;
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
             align-items: flex-start;
-            padding: 10px;
+            /* padding: 20px; */
         }
 
         img.folder {
@@ -86,12 +87,12 @@
         }
 
         .folder-label {
-            font-family: 'Londrina Sketch', cursive;
-            font-size: 2vw;
+            font-family: 'Solid', cursive;
+            font-size: auto;
             color: black;
             text-decoration: none;
             display: block;
-            font-weight: 700;
+            font-weight: 50;
             text-align: center;
         }
 
@@ -105,36 +106,36 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 20px;
-            width: 10vw;
+            margin: 10px;
+            width: auto; 
         }
 
         .loading {
             text-align: center;
-            margin-top: 20px;
-            font-family: 'Londrina Solid', cursive;
-        }
+            margin-top: 0px;
+            font-family: 'Solid', cursive;
+          }
 
-        .breadcrumb {
+            /* .breadcrumb {
             margin-top: 100px;
             font-size: 24px;
             font-family: 'Londrina Solid', cursive;
-        }
+        } */
 
-        .breadcrumb a {
+        /* .breadcrumb a {
             text-decoration: none;
             color: blue;
             font-weight: bold;
-        }
+        } */
 
         .breadcrumb a:hover {
             text-decoration: underline;
         }
 
-        .breadcrumb span {
+        /* .breadcrumb span {
             font-weight: normal;
             color: black;
-        }
+        } */
 
         img.bg {
             width: 100%;
@@ -148,72 +149,145 @@
 
         /* Additional styles */
         .container {
-            padding: 20px;
+            position: relative;
+            margin-top: 10px; /* Adjust this value as needed */
+            /* padding: 0px; */
+            max-width: auto;
+            margin: 0 auto;
         }
 
-        .heading, .breadcrumb, .loading {
+        .heading, .loading {
             position: relative;
             z-index: 1;
         }
-
-        .file-list ul {
-            list-style: none;
-            padding: 0;
+        
+        header.header {
+        background-color: rgba(254, 246, 17, 0.41);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        /* width: 100%; */
+        /* z-index: 1000; */
         }
 
-        .file-list ul li {
-            margin: 10px 0;
+        header.header .title {
+        font-family: 'Londrina Solid', cursive;
+        font-size: 2.5em;
+        text-align: center;
+        margin: 0;
         }
 
-        .file-list ul li a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
+    header.header nav {
+  display: flex;
+  list-style: none;
+  /* padding: 0; */
+  /* margin: 0; */
+    }
+
+    header.header nav li {
+    margin: 0 15px;
+    }
+
+    /* Menu icon */
+    .menu-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px; /* Adjust size as needed */
+    }
+
+    .menu-icon:hover {
+        color: #333333; /* Adjust hover color */
         }
+    
+        /* main { */
+           /* position: fixed;  */
+            /* top: -100px; */
+        /* } */
 
-        .file-list ul li a:hover {
-            text-decoration: underline;
-        }
-    </style>
+.breadcrumb {
+    
+  position: relative; /* Remove absolute positioning */
+  margin-top:100px; /* Add margin below the header */
+  /* padding: 25px; Reduce padding */
+  background-color: rgba(255, 255, 255, 0);
+  /* z-index: 90px; Ensure it's below the header but above other content */
+  font-size: 30px; /* Increase font size */
+}
 
-    {% block styles %}{% endblock %}
-</head>
-<body>
+ /* Responsive adjustments using media queries */
+ @media (max-width: 768px) {
+      /* Adjust header styles for mobile */
+      .header {
+        flex-direction: column; /* Stack elements vertically on mobile */
+      }
 
+      .header .title {
+        font-size: 1.8em; /* Reduce title size on mobile */
+      }
+
+      .header nav {
+        margin-top: 10px; /* Add spacing after title on mobile */
+      }
+
+      .menu-icon {
+        display: flex; /* Show menu icon on mobile */
+      }
+
+      /* Adjust folder styles for responsiveness (optional) */
+      .folder-item {
+        width: 40%; /* Adjust folder width for better mobile layout (optional) */
+      }
+      .breadcrumb {
+        font-size: 15px;
+        line-height: 1.5;
+        padding: 2px;
+    }
+    .file-container {
+        margin-top: 0; /* Remove negative margin on smaller screens */
+        padding: 10px; /* Reduce padding for better spacing */
+    }
+    }
+
+</style>
+
+{% block styles %}{% endblock %}
+        </head>
+        <body>
+            <div class="breadcrumb">
+                {% for crumb in breadcrumbs %}
+                  {% if crumb.url %}
+                    <a href="{{ crumb.url }}">{{ crumb.title }}</a>
+                  {% else %}
+                    <span>{{ crumb.title }}</span>
+                  {% endif %}
+                  {% if not loop.last %}
+                    <span>></span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              
     <header class="header">
-        <div class="title">{% block header_title %}StudyVault{% endblock %}</div>
+        <div class="title">StudyVault</div>
         <nav>
-            <!-- Add your navigation links here -->
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/support">Support</a></li>
+          </ul>
         </nav>
-    </header>
+        <i class="fas fa-bars menu-icon"></i>
+      </header>
 
-    {% block content %}
-    <div class="container">
-        <!-- Display Folders and Files -->
-        <div class="file-container">
-            <h2>Folders</h2>
-            <ul>
-                {% for folder in folders %}
-                <li>
-                    <a href="{{ url_for('show_directory', folder_path=folder_path ~ '/' ~ folder) }}">{{ folder }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-
-            <h2>Files</h2>
-            <ul>
-                {% for file in files %}
-                <li>
-                    <a href="{{ url_for('static', filename=folder_path ~ '/' ~ file) }}" download>{{ file }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    {% endblock %}
+    {% block content %}{% endblock %}
     
 </body>
 </html>
